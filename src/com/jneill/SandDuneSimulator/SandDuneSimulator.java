@@ -14,7 +14,8 @@ public class SandDuneSimulator extends Application{
 	private GridPane rootGrid;
 	private GridPane windGrid;
 	private TextField wind00, wind01, wind02, wind10, wind12, wind20, wind21, wind22;
-	private TextField D, beta, time, steps;
+	private TextField Dinp, betaInp, timeInp, stepsInp;
+	private Label D, beta, time, steps;
 	private ScrollPane sp;
 	
 	//public int t, stps;
@@ -56,26 +57,34 @@ public class SandDuneSimulator extends Application{
 		run = new Button();
 		run.setText("Run Simulation");
 		
-		D = new TextField();
-		beta = new TextField();
-		time = new TextField();
-		steps = new TextField();
+		Dinp = new TextField();
+		betaInp = new TextField();
+		timeInp = new TextField();
+		stepsInp = new TextField();
+		D = new Label("D");
+		beta = new Label("beta");
+		time = new Label("time");
+		steps = new Label("steps");
 		
 		sp = new ScrollPane();
-		sp.setPrefSize(300, 400);
+		sp.setPrefSize(300, 200);
 		//sp.setVmax(200);
 		sp.setHbarPolicy(ScrollBarPolicy.NEVER);
 		sp.setVbarPolicy(ScrollBarPolicy.ALWAYS);
 
 		rootGrid.add(windGrid, 0, 0, 3, 1);
-		rootGrid.add(sp, 4, 0, 2, 5);
-		rootGrid.add(D, 1, 1);
-		rootGrid.add(beta, 1, 2);
-		rootGrid.add(time, 1, 3);
-		rootGrid.add(steps, 1, 4);
+		rootGrid.add(sp, 4, 0, 2, 6);
+		rootGrid.add(D, 0, 1);
+		rootGrid.add(Dinp, 1, 1);
+		rootGrid.add(beta, 0, 2);
+		rootGrid.add(betaInp, 1, 2);
+		rootGrid.add(time, 0, 3);
+		rootGrid.add(timeInp, 1, 3);
+		rootGrid.add(steps, 0, 4);
+		rootGrid.add(stepsInp, 1, 4);		
 		rootGrid.add(run, 0, 5);
 		
-		primaryStage.setScene(new Scene(rootGrid, 800, 800));
+		primaryStage.setScene(new Scene(rootGrid, 800, 300));
 		primaryStage.show();
 	}
 		
