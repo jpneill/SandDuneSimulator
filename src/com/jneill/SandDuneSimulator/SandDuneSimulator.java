@@ -92,6 +92,11 @@ public class SandDuneSimulator extends Application{
 				imagesVBox.getChildren().clear();
 				sp.setContent(null);
 				
+				/*
+				 * TODO: THERE IS AN ISSUE WITH WIND DIRECTION BEING ROTATED 90 DEGREES. DOUBLE CHECK INPUT AND LOGIC.
+				 * (band-aid fix might be to just auto change the input values so we get the right image)
+				 */
+				
 				//create the wind input array
 				windInput = new double[8];
 				windInput[0] = Double.parseDouble(wind00.getText());
