@@ -1,5 +1,6 @@
 package com.jneill.SandDuneSimulator;
 
+import java.awt.image.*;
 import java.util.Random;
 
 public class SandDunes {
@@ -40,6 +41,14 @@ public class SandDunes {
 	
 	public void setdsteps(int Dsteps){
 		this.dsteps = Dsteps;
+	}
+	
+	public double[][] gethmap(){
+		return this.hmap;
+	}
+	
+	public double[][] getupdatedMap(){
+		return this.updatedMap;
 	}
 	
 	//Constructors
@@ -104,7 +113,7 @@ public class SandDunes {
                      sum = wind[0][0] * update[update[0].length - 1][update.length - 1] + wind[0][1] * 
                     		 update[update[0].length - 1][j] + wind[0][2] * update[update[0].length - 1][j + 1] + 
                     		 wind[1][0] * update[i][update.length - 1] + wind[1][2] * update[i][j + 1] + 
-                    		 wind[2][0] * update[i + 1][update.length] + wind[2][1] * update[i + 1][j] + 
+                    		 wind[2][0] * update[i + 1][update.length - 1] + wind[2][1] * update[i + 1][j] + 
                     		 wind[2][2] * update[i + 1][j + 1];
                  }
                  else if (i == update[0].length - 1 && j == update.length - 1)//Find sum for the bottom right corner element
@@ -188,7 +197,7 @@ public class SandDunes {
                      sum = wind[0][0] * I[I[0].length - 1][I.length - 1] + wind[0][1] * 
                     		 I[I[0].length - 1][j] + wind[0][2] * I[I[0].length - 1][j + 1] + 
                     		 wind[1][0] * I[i][I.length - 1] + wind[1][2] * I[i][j + 1] + 
-                    		 wind[2][0] * I[i + 1][I.length] + wind[2][1] * I[i + 1][j] + 
+                    		 wind[2][0] * I[i + 1][I.length - 1] + wind[2][1] * I[i + 1][j] + 
                     		 wind[2][2] * I[i + 1][j + 1];
                  }
                  else if (i == I[0].length - 1 && j == I.length - 1)//Find sum for the bottom right corner element
@@ -263,8 +272,40 @@ public class SandDunes {
                              sum += (wind[k][l] * I[i + (k - 1)][j + (l - 1)]);
                  }
                  
-                 delta[i][j] = I[i][j] - sum;
+                 delta[i][j] = I[i][j] - sum;                 
              }
-     }
+    }
+	
+	public BufferedImage Draw(double[][] sandGrid){
+		BufferedImage image = new BufferedImage(sandGrid[0].length, sandGrid.length, BufferedImage.TYPE_INT_RGB);
+		for(i = 0; i < sandGrid[0].length; i++){
+			for(j = 0; j < sandGrid.length; j++){
+				if(sandGrid[i][j] < 0.005){
+					image.setRGB(i, j, 0x000000);//set pixel to white if it is below the threshold
+				} else {
+					image.setRGB(i, j, 0xFFFFFF);//set pixel to black
+				}
+			}
+		}
+		return image;
+	}
+	
+	public void Iterate(int x){
+		if(x == 0){
+			IncrementHeight(hmap);
+			for(i = 0; i < updatedMap.length; i++){
+				for(j = 0; j < updatedMap.length; j++){
+					updatedMap[i][j] = hmap[i][j] + delta[i][j];//create a new map after one timestep
+				}
+			}
+		}else{
+			IncrementHeight(updatedMap);
+			for(i = 0; i < updatedMap.length; i++){
+				for(j = 0; j < updatedMap.length; j++){
+					updatedMap[i][j] += delta[i][j];//update the map for each time step
+				}
+			}
+		}
+	}
 }
 
