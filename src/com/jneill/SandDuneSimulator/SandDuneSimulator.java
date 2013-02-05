@@ -139,7 +139,7 @@ public class SandDuneSimulator extends Application{
 					//simulate the formation of the dunes over time
 					dunes.Iterate(i);
 					//draw image if the time = one of the desired timesteps
-					if(i % Integer.parseInt(stepsInp.getText()) == 0 || i == Integer.parseInt(timeInp.getText())){
+					if(i > 0 && (i % Integer.parseInt(stepsInp.getText()) == 0 || i == Integer.parseInt(timeInp.getText()))){
 						try {
 							images.add(convertImage(dunes.Draw(dunes.getupdatedMap())));
 						} catch (IOException e) {
