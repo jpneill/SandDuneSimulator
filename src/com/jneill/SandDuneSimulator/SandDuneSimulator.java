@@ -31,9 +31,6 @@ public class SandDuneSimulator extends Application{
 	private SandDunes dunes;
 	int i;
 	
-	//public int t, stps;
-	//public double d, b;
-		
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		primaryStage.setTitle("Sand Dune Sim");

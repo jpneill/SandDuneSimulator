@@ -6,7 +6,7 @@ import java.util.Random;
 public class SandDunes {
 	
 	//paramters/fields
-	private int x, i, j, k, l, m, t, dsteps;
+	private int x, i, j, k, l, t, dsteps;
 	private double h, D, beta, sum;
 	private double[][] hmap, delta1, delta2, wind, I, delta, updatedMap;
 	private double[] windInput;
